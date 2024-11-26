@@ -1,2 +1,131 @@
 <LoginScreen@Screen>:
-    
+    MDLabel:
+        text: 'Forest'
+        theme_text_color: 'Custom'
+        text_color: 'white'
+        pos_hint: {'center_x': 0.5, 'center_y': 0.9}
+        halign: 'center'
+        font_style: 'Headline'
+        outline_color: (0, 0, 0, 0.1)
+        outline_width: 1
+
+
+    MDCard:
+        opacity: 0.85
+        padding: 20
+        spacing: 5
+        size_hint: 0.5, 0.7
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+        MDRelativeLayout:
+
+            MDSegmentedButton:
+                id: seg_btn
+                pos_hint: {'center_x': 0.5, 'center_y': 0.9}
+
+                # Login Form------------------------------------------------------------------------
+                MDSegmentedButtonItem:
+                    active: True
+                    on_press:
+                        
+
+                    MDSegmentButtonLabel:
+                        text: 'Log In'
+
+                # Sign Up Form------------------------------------------------------------------------
+                MDSegmentedButtonItem:
+                    on_press:
+                        
+
+
+                    MDSegmentButtonLabel:
+                        text: 'Sign Up'
+
+
+            ScreenManager:
+                id: card_manager
+                transition: SlideTransition(duration=0.2)
+
+                #Login Form------------------------------------------------------------------------
+                Screen:
+                    name: 'user_login'
+
+                    #Username / Email TextField------------------------
+                    MDTextField:
+                        id: login_textfield
+                        mode: 'outlined'
+                        pos_hint: {'center_y': 0.65}
+
+                        MDTextFieldHintText:
+                            text: 'Username'
+
+                        MDTextFieldHelperText:
+                            text: 'example@gmail.com'
+                            mode: 'persistent'
+
+                    #Password TextField------------------------
+                    MDTextField:
+                        id: login_passfield
+                        mode: 'outlined'
+                        pos_hint: {'center_y': 0.35}
+                        password: True
+
+                        MDTextFieldHintText:
+                            text: 'Password'
+
+                    #Log In Button------------------------
+                    MDButton:
+                        id: login_btn
+                        style: 'outlined'
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.10}
+                        on_press: app.attempt_login()
+
+                        MDButtonText:
+                            text: 'Log In'
+
+                # Sign Up Form------------------------------------------------------------------------
+                Screen:
+                    name: 'user_signup'
+
+                    #Username / Email TextField------------------------
+                    MDTextField:
+                        id: signup_textfield
+                        mode: 'outlined'
+                        pos_hint: {'center_y': 0.7}
+
+                        MDTextFieldHintText:
+                            text: 'Username'
+
+                        MDTextFieldHelperText:
+                            text: 'example@gmail.com'
+                            mode: 'persistent'
+
+                    #Password TextField------------------------
+                    MDTextField:
+                        id: signup_passfield
+                        mode: 'outlined'
+                        pos_hint: {'center_y': 0.48}
+                        password: True
+
+                        MDTextFieldHintText:
+                            text: 'Password'
+
+                    #Confirm Password TextField------------------------
+                    MDTextField:
+                        id: signup_cfpassfield
+                        mode: 'outlined'
+                        pos_hint: {'center_y': 0.26}
+                        password: True
+
+                        MDTextFieldHintText:
+                            text: 'Confirm Password'
+
+                    #Log In Button------------------------
+                    MDButton:
+                        id: signup_btn
+                        style: 'outlined'
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.06}
+                        on_press: app.attempt_signup()
+
+                        MDButtonText:
+                            text: 'Create Account'
