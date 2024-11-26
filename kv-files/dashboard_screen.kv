@@ -1,2 +1,76 @@
+#:import SlideTransition kivy.uix.screenmanager.SlideTransition
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+
 <DashboardScreen@Screen>:
-    
+    Profile:
+        id: profile
+
+    MDLabel:
+        id: timer_label
+        text: '25:00'
+        halign: 'center'
+        theme_text_color: "Custom"
+        text_color: (1, 1, 1, 1)
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        adaptive_height: True
+        font_style: 'Display'
+        role: 'large'
+
+    MDBoxLayout:
+        adaptive_size: True
+        md_bg_color: 0, 0, 0, 0.5
+        pos_hint: {'center_x': 0.5, 'center_y': 0.1}
+        radius: [dp(16), ]
+
+        # Setup ------------------------------------------------
+        MDButton:
+            style: 'text'
+            on_press: 
+
+            theme_bg_color: 'Custom'
+            md_bg_color: 0, 0, 0, 0.5
+
+            on_release:
+
+            MDButtonIcon:
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                icon: 'image-area'
+
+        # Pomodoro ------------------------------------------------
+        MDButton:
+            style: 'text'
+            theme_bg_color: 'Custom'
+            md_bg_color: 0, 0, 0, 0.5
+
+            on_release:
+
+                # ----------------i.e., start timer if no timer event, else stop----------------
+
+
+            MDButtonIcon:
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                icon: 'play-pause'
+
+        # Statistics ------------------------------------------------
+        MDButton:
+            style: 'text'
+            theme_bg_color: 'Custom'
+            md_bg_color: 0, 0, 0, 0.5
+
+            MDButtonIcon:
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                icon: 'chart-box'
+
+
+
+<Profile@RelativeLayout>:
+    size_hint: None, None
+    size: 50, 50
+    radius: self.width / 2
+    pos_hint: {'center_x': 0.05, 'center_y': 0.925}
+
+    MDButton:
+        style: 'outlined'
+        size: 50, 50
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        radius: self.width / 2
