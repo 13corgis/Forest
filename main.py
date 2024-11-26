@@ -35,6 +35,43 @@ class ForestApp(MDApp):
         Builder.load_file('kv-files/dashboard_screen.kv')
         Builder.load_file('kv-files/setup_screen.kv')
     
+    # ! Login Attempt - - - - - - - - - - - -
+    def attempt_login(self):
+        login_textfield = self.root.get_screen('login').ids.login_textfield
+        login_passfield = self.root.get_screen('login').ids.login_passfield
+
+        if login_textfield.text != '' and login_passfield != '':
+            if login_textfield.text in self.read_user_database() and self.read_user_database()[
+                login_textfield.text] == login_passfield.text:
+                print("Logged in successfully")
+                self.root.current = 'dashboard'
+            else:
+                print("Invalid Credentials")
+
+    # ! Signup Attempt - - - - - - - - - - - -
+    def attempt_signup(self):
+        signup_textfield = self.root.get_screen('login').ids.signup_textfield
+        signup_passfield = self.root.get_screen('login').ids.signup_passfield
+        signup_cfpassfield = self.root.get_screen('login').ids.signup_cfpassfield
+
+        if signup_textfield.text != '' and signup_passfield.text != '' and signup_cfpassfield.text != '':
+            if signup_passfield.text == signup_cfpassfield.text:
+                # IF user and pass not in db
+                if signup_textfield.text not in self.read_user_database().keys():
+                    self.update_user_database(signup_textfield.text, signup_cfpassfield.text)
+
+                    print("Successfully registered")
+                    self.root.current = 'login'
+
+                    signup_textfield.text = ''
+                    signup_passfield.text = ''
+                    signup_cfpassfield.text = ''
+                # Else exists
+                else:
+                    print("Account already exists")
+            else:
+                print("Passwords do not match")
+    
     # ! Database Interactions (Read, Update) - - - - - - - - - - - -
     def read_user_database(self):
         with open('resources/db.txt', mode='r') as file:

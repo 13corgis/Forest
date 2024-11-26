@@ -27,7 +27,8 @@
                 MDSegmentedButtonItem:
                     active: True
                     on_press:
-                        
+                        app.root.get_screen('login').ids.card_manager.transition = SlideTransition(direction='right', duration=0.22)
+                        app.root.get_screen('login').ids.card_manager.current = 'user_login'
 
                     MDSegmentButtonLabel:
                         text: 'Log In'
@@ -35,7 +36,8 @@
                 # Sign Up Form------------------------------------------------------------------------
                 MDSegmentedButtonItem:
                     on_press:
-                        
+                        app.root.get_screen('login').ids.card_manager.transition = SlideTransition(direction='left', duration=0.22)
+                        app.root.get_screen('login').ids.card_manager.current = 'user_signup'
 
 
                     MDSegmentButtonLabel:
