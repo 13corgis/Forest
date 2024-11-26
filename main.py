@@ -34,5 +34,22 @@ class ForestApp(MDApp):
         Builder.load_file('kv-files/login_screen.kv')
         Builder.load_file('kv-files/dashboard_screen.kv')
         Builder.load_file('kv-files/setup_screen.kv')
+    
+    # ! Database Interactions (Read, Update) - - - - - - - - - - - -
+    def read_user_database(self):
+        with open('resources/db.txt', mode='r') as file:
+            db = {}
+            for pair in file.readlines():
+                username = pair.split(sep=',')[0]
+                password = pair.split(sep=',')[1].strip()
+                db[username] = password
+
+            print(db)
+
+            return db
+
+    def update_user_database(self, username, password):
+        with open('resources/db.txt', mode='a') as file:
+            file.write(f'\n{username},{password}')
 
 ForestApp().run()
