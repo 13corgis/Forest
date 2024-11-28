@@ -38,6 +38,7 @@ class ForestApp(MDApp):
         super(ForestApp, self).__init__(**kwargs)
         
         # Member Variables - Background
+        self.app_bg = 'resources/test.mp4'
         self.bg_paths = [
             'resources/bg_0.jpg',
             'resources/bg_1.jpg',
