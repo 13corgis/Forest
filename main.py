@@ -38,6 +38,8 @@ class ForestApp(MDApp):
         pass
     
     def build(self):
+        Window.hide()
+        
         self.load_kv_files()
         
         Clock.schedule_once(lambda dt: self.enter_app(), 3)
@@ -45,7 +47,10 @@ class ForestApp(MDApp):
         return Builder.load_file('kv-files/forest.kv')
 
     def on_start(self):
-        pass
+        # ! Initializations - - - - - - - - - - - -
+        init_window()
+        
+        Clock.schedule_once(lambda dt: Window.show(), 0)
     
     # ! Startup Sequence - - - - - - - - - - - -
     def enter_app(self):
