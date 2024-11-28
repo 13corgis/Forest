@@ -35,7 +35,18 @@ def init_window():
 class ForestApp(MDApp):
     def __init__(self, **kwargs):
         super(ForestApp, self).__init__(**kwargs)
-        pass
+        
+        # Member Variables - Background
+        self.bg_paths = [
+            'resources/bg_0.jpg',
+            'resources/bg_1.jpg',
+            'resources/bg_2.jpg',
+            'resources/bg_3.jpg',
+            'resources/bg_4.jpg',
+            'resources/bg_5.jpg',
+            'resources/bg_6.jpg'
+        ]
+        self.selected_bg = 0
     
     def build(self):
         Window.hide()
