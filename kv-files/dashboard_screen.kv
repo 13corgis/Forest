@@ -31,6 +31,9 @@
             md_bg_color: 0, 0, 0, 0.5
 
             on_release:
+                app.root.current = 'setup'
+                app.root.transition = SlideTransition(duration=0.25)
+                Window.borderless=1
 
             MDButtonIcon:
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
