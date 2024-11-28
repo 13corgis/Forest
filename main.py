@@ -73,6 +73,21 @@ class ForestApp(MDApp):
     def to_login(self):
         self.root.current = 'login'
     
+    # ! Selected Background Tracker - - - - - - - - - - - -
+    def manage_background(self, action):
+
+        if action == 'next':
+            if self.selected_bg == 6:
+                self.selected_bg = 0
+            else:
+                self.selected_bg += 1
+        elif action == 'prev':
+            if self.selected_bg == 0:
+                self.selected_bg = 6
+            else:
+                self.selected_bg -= 1
+    
+    # ! Load kv files - - - - - - - - - - - -
     def load_kv_files(self):
         Builder.load_file('kv-files/startup_screen.kv')
         Builder.load_file('kv-files/login_screen.kv')
