@@ -89,13 +89,6 @@ class ForestApp(MDApp):
 
         self.root.get_screen('setup').ids.setup_bg.source = self.bg_paths[self.selected_bg]
     
-    # ! Load kv files - - - - - - - - - - - -
-    def load_kv_files(self):
-        Builder.load_file('kv-files/startup_screen.kv')
-        Builder.load_file('kv-files/login_screen.kv')
-        Builder.load_file('kv-files/dashboard_screen.kv')
-        Builder.load_file('kv-files/setup_screen.kv')
-    
     # ! Login Attempt - - - - - - - - - - - -
     def attempt_login(self):
         login_textfield = self.root.get_screen('login').ids.login_textfield
@@ -149,5 +142,12 @@ class ForestApp(MDApp):
     def update_user_database(self, username, password):
         with open('resources/db.txt', mode='a') as file:
             file.write(f'\n{username},{password}')
+    
+    # ! Load kv files - - - - - - - - - - - -
+    def load_kv_files(self):
+        Builder.load_file('kv-files/startup_screen.kv')
+        Builder.load_file('kv-files/login_screen.kv')
+        Builder.load_file('kv-files/dashboard_screen.kv')
+        Builder.load_file('kv-files/setup_screen.kv')
 
 ForestApp().run()
