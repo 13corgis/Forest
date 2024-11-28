@@ -1,6 +1,7 @@
 from kivy.core.window import Window
 from kivymd.app import MDApp
 from kivy.lang import Builder
+from kivy.uix.image import AsyncImage
 from kivy.uix.screenmanager import FadeTransition
 from kivy.clock import Clock
 
@@ -60,6 +61,7 @@ class ForestApp(MDApp):
     def on_start(self):
         # ! Initializations - - - - - - - - - - - -
         init_window()
+        self.init_bg_images()
         
         Clock.schedule_once(lambda dt: Window.show(), 0)
     
@@ -142,6 +144,13 @@ class ForestApp(MDApp):
     def update_user_database(self, username, password):
         with open('resources/db.txt', mode='a') as file:
             file.write(f'\n{username},{password}')
+    
+    # ! Initialize Background Resources - - - - - - - - - - - -
+    def init_bg_images(self):
+        # image = AsyncImage(source=self.app_bg)
+
+        for path in self.bg_paths:
+            image = AsyncImage(source=path)
     
     # ! Load kv files - - - - - - - - - - - -
     def load_kv_files(self):
