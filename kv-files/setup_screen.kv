@@ -1,2 +1,56 @@
 <SetupScreen@Screen>:
-    
+
+    # Timer Label Preview
+    MDLabel:
+        text: '25:00'
+        halign: 'center'
+        theme_text_color: "Custom"
+        text_color: (1, 1, 1, 1)
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        adaptive_height: True
+        font_style: 'Display'
+        role: 'large'
+        opacity: 0.4
+
+    # Select Setup -------------------------------------------------------
+    MDButton:
+        style: 'outlined'
+
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+        size_hint: None, None
+        size: 1200, 800
+        opacity: 0
+
+    # Previous Setup -------------------------------------------------------
+    MDIconButton:
+        id: previous
+        icon: 'chevron-left'
+
+        pos_hint: {'center_x':0.05, 'center_y':0.5}
+
+        style: 'standard'
+        opacity: 0.5
+
+        theme_bg_color: 'Custom'
+        md_bg_color: 0, 0, 0, 0.5
+
+        theme_icon_color: 'Custom'
+        icon_color: 1, 1, 1, 1
+
+
+    # Next Setup -------------------------------------------------------
+    MDIconButton:
+        id: next
+        icon: 'chevron-right'
+
+        pos_hint: {'center_x':0.95, 'center_y':0.5}
+
+        style: 'standard'
+        opacity: 0.5
+
+        theme_bg_color: 'Custom'
+        md_bg_color: 0, 0, 0, 0.5
+
+        theme_icon_color: 'Custom'
+        icon_color: 1, 1, 1, 1
