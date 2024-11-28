@@ -1,8 +1,36 @@
+from kivy.core.window import Window
 from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivy.uix.screenmanager import FadeTransition
 from kivy.clock import Clock
 
+from screeninfo import get_monitors
+
+# ! Configure Window - - - - - - - - - - - -
+def init_window():
+    # ! Screen Size (NEED TO ADD VALIDATION FOR MULTIPLE SCREENS)
+
+    # Window Size
+    monitor = get_monitors()[0]
+    screen_width = monitor.width
+    screen_height = monitor.height
+
+    desired_width = 1200
+    desired_height = 800
+
+    Window.size = (desired_width, desired_height)
+    Window.minimum_width = desired_width
+    Window.minimum_height = desired_height
+
+    # Center Window
+    x = screen_width // 2 - desired_width // 2
+    y = screen_height // 2 - desired_height // 2
+
+    Window.left = x
+    Window.top = y
+
+    # Other
+    # Window.set_title("Forest")
 
 class ForestApp(MDApp):
     def __init__(self, **kwargs):
