@@ -2,6 +2,12 @@
 #:import SlideTransition kivy.uix.screenmanager.SlideTransition
 
 <LoginScreen@Screen>:
+    Video:
+        source: app.app_bg
+        state: 'play'
+        options: {'eos': 'loop'}
+        fit_mode: 'cover'
+        
     MDLabel:
         text: 'Forest'
         theme_text_color: 'Custom'
