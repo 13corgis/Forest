@@ -26,6 +26,15 @@
         size: 1200, 800
         opacity: 0
 
+        on_press:
+            app.root.transition = FadeTransition(duration=0.5)
+
+        on_release:
+            app.root.get_screen('dashboard').ids.dashboard_bg.source = app.root.get_screen('setup').ids.setup_bg.source
+            app.root.current = 'dashboard'
+            app.root.transition = SlideTransition(duration=0.25)
+            Window.borderless=0
+
     # Previous Setup -------------------------------------------------------
     MDIconButton:
         id: previous
@@ -41,6 +50,9 @@
 
         theme_icon_color: 'Custom'
         icon_color: 1, 1, 1, 1
+
+        on_press:
+            app.manage_background('prev')
 
 
     # Next Setup -------------------------------------------------------
@@ -58,3 +70,6 @@
 
         theme_icon_color: 'Custom'
         icon_color: 1, 1, 1, 1
+
+        on_press:
+            app.manage_background('next')
