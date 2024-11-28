@@ -148,7 +148,7 @@ class ForestApp(MDApp):
     
     # ! Initialize Background Resources - - - - - - - - - - - -
     def init_bg_images(self):
-        # image = AsyncImage(source=self.app_bg)
+        image = AsyncImage(source=self.app_bg)
 
         for path in self.bg_paths:
             image = AsyncImage(source=path)
