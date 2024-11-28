@@ -86,6 +86,8 @@ class ForestApp(MDApp):
                 self.selected_bg = 6
             else:
                 self.selected_bg -= 1
+
+        self.root.get_screen('setup').ids.setup_bg.source = self.bg_paths[self.selected_bg]
     
     # ! Load kv files - - - - - - - - - - - -
     def load_kv_files(self):
