@@ -153,6 +153,14 @@ class ForestApp(MDApp):
                     print("Account already exists")
             else:
                 print("Passwords do not match")
+
+    # ! Success Dialog Sequence - - - - - - - - - - - -
+    def show_success_dialog(self):
+        success_dialog = MDDialog(MDDialogIcon(icon='check-circle', role='large'), theme_bg_color='Custom',
+                                  md_bg_color=(0, 0, 0, 0))
+        success_dialog.open()
+
+        Clock.schedule_once(lambda dt: success_dialog.dismiss(), 1)
     
     # ! Database Interactions (Read, Update) - - - - - - - - - - - -
     def read_user_database(self):
