@@ -23,8 +23,10 @@
         role: 'large'
 
     MDBoxLayout:
+        id: dash_btns
         adaptive_size: True
-        md_bg_color: 0, 0, 0, 0.5
+        md_bg_color: 0, 0, 0, 1
+        opacity: 0.6
         pos_hint: {'center_x': 0.5, 'center_y': 0.1}
         radius: [dp(16), ]
 
@@ -35,7 +37,7 @@
                 app.root.transition = FadeTransition(duration=0.2)
 
             theme_bg_color: 'Custom'
-            md_bg_color: 0, 0, 0, 0.5
+            md_bg_color: 0, 0, 0, 0
 
             on_release:
                 app.root.current = 'setup'
@@ -50,7 +52,7 @@
         MDButton:
             style: 'text'
             theme_bg_color: 'Custom'
-            md_bg_color: 0, 0, 0, 0.5
+            md_bg_color: 0, 0, 0, 0
 
             on_release:
 
@@ -65,7 +67,7 @@
         MDButton:
             style: 'text'
             theme_bg_color: 'Custom'
-            md_bg_color: 0, 0, 0, 0.5
+            md_bg_color: 0, 0, 0, 0
 
             MDButtonIcon:
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
