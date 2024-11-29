@@ -247,8 +247,8 @@ class ForestApp(MDApp):
             orientation='vertical'
         )
 
-        # self.settings_dialog.on_open
-        # self.settings_dialog.on_dismiss
+        self.settings_dialog.on_open = self.change_opacity
+        self.settings_dialog.on_dismiss = self.change_opacity
 
     # ! Initialize Help Dialog - - - - - - - - - - - -
     def init_help_dialog(self):
@@ -274,8 +274,8 @@ class ForestApp(MDApp):
             orientation='vertical'
         )
 
-        # self.help_dialog.on_pre_open
-        # self.help_dialog.on_dismiss
+        self.help_dialog.on_open = self.change_opacity
+        self.help_dialog.on_dismiss = self.change_opacity
     
     # ! Initialize Background Resources - - - - - - - - - - - -
     def init_bg_images(self):
