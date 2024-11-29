@@ -71,6 +71,9 @@ class ForestApp(MDApp):
         # ! Initializations - - - - - - - - - - - -
         init_window()
         self.init_bg_images()
+        self.init_settings_dialog()
+        self.init_help_dialog()
+        self.init_profile_menu()
         
         Clock.schedule_once(lambda dt: Window.show(), 0)
     
