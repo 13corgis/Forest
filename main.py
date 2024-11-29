@@ -157,6 +157,10 @@ class ForestApp(MDApp):
         self.root.get_screen('login').ids.login_passfield.text = ''
         self.root.current = 'login'
         self.menu.dismiss()
+
+    # ! Profile Menu - - - - - - - - - - - -
+    def open_profile_menu(self):
+        self.menu.open()
         
     # ! Initialize Profile Menu - - - - - - - - - - - -
     def init_profile_menu(self):
