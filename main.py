@@ -198,9 +198,14 @@ class ForestApp(MDApp):
             
     # ! Profile menu > logout - - - - - - - - - - - -
     def logout(self):
+        self.timer.default_timer_settings()
+
+        self.root.transition = FadeTransition(duration=0.15)
         self.root.get_screen('login').ids.login_passfield.text = ''
         self.root.current = 'login'
         self.menu.dismiss()
+
+        self.root.transition = FadeTransition(duration=0.3)
 
     # ! Profile Menu - - - - - - - - - - - -
     def open_profile_menu(self):
