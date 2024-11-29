@@ -1,0 +1,135 @@
+MDRelativeLayout:
+    size_hint: None, None
+    size: 650, 400
+    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+    # ! Fun Fact 1 - - - - - - - - - - - -
+    MDBoxLayout:
+        size_hint: 0.43, 0.24
+        md_bg_color: 1, 1, 1, 0.2
+        pos_hint: {'center_x': 0.27, 'center_y': .89}
+        orientation: 'vertical'
+        radius: [8, 8, 8, 8]
+
+        MDLabel:
+            text: 'Fun Fact #1'
+            font_style: 'Headline'
+            role: 'small'
+            bold: True
+            halign: 'left'
+            text_color: 1, 1, 1, 1
+            padding: [10, 10, 10, 3]
+        
+        MDLabel:
+            text: 'The name "Pomodoro" means "tomato" in Italian.'
+            font_style:'Title'
+            role: 'medium'
+            halign: 'justify'
+            text_color: 1, 1, 1, 1
+            padding: [10, 3, 10, 10]
+    
+    # ! History - - - - - - - - - - - -
+    MDBoxLayout:
+        adaptive_size: True
+        size_hint: 0.43, 0.60
+        md_bg_color: 1, 1, 1, 0.2
+        pos_hint: {'center_x': 0.27, 'center_y': 0.44}
+        orientation: 'vertical'
+        radius: [8, 8, 8, 8]
+
+        MDLabel:
+            text: 'History'
+            font_style: 'Headline'
+            role: 'small'
+            bold: True
+            halign: 'left'
+            valign: 'top'
+            text_color: 1, 1, 1, 1
+            adaptive_size: True
+            padding: [10, 10, 10, 3]
+        
+        MDLabel:
+            text: 'The Pomodoro Technique, created by Francesco Cirillo in the late 1980s, uses 25-minute focused work intervals separated by short breaks. Inspired by a tomato-shaped kitchen time, it has become a popular method for improving focus and time management.'
+            font_style: 'Title'
+            role: 'medium'
+            halign: 'justify'
+            valign: 'top'
+            text_color: 1, 1, 1, 1
+            padding: [10, 3, 10, 10]
+    
+    # ! Stay Focused - - - - - - - - - - - -
+    MDBoxLayout:
+        size_hint: 0.43, 0.57
+        md_bg_color: 1, 1, 1, 0.2
+        pos_hint:{'center_x': 0.73, 'center_y': 0.73}
+        orientation: 'vertical'
+        radius: [8, 8, 8, 8]
+
+        MDLabel:
+            text: 'Stay Focused'
+            font_style: 'Headline'
+            role: 'small'
+            bold: True
+            halign: 'left'
+            text_color: 1, 1, 1, 1
+            adaptive_size: True,
+            padding: [10, 10, 10, 3]
+        
+        MDLabel:
+            text: 'Pomodoro Timer is your personal productivity companion, designed to help you stay focused and work smarter. Based on the Pomodoro Technique, this app encourages you to break your work into focused intervals, typically 25 minutes, followed by short breaks to recharge.'
+            font_style: 'Title'
+            role: 'medium'
+            halign: 'justify'
+            text_color: 1, 1, 1, 1
+            padding: [10, 3, 10, 10]
+    
+    # ! Fun Fact 2 - - - - - - - - - - - -
+    MDBoxLayout:
+        size_hint: 0.43, 0.28
+        md_bg_color: 1, 1, 1, 0.2
+        pos_hint: {'center_x': 0.73, 'center_y': 0.28}
+        orientation: 'vertical'
+        radius: [8, 8, 8, 8]
+
+        MDLabel:
+            text: 'Fun Fact #2'
+            font_style: 'Headline'
+            role: 'small'
+            bold: True
+            halign: 'left'
+            text_color: 1, 1, 1, 1
+            adaptive_size: True
+            padding: [10, 10, 10, 3]
+        
+        MDLabel:
+            text: 'Working in 25-minute intervals aligns with the brain\'s natural focus cycle.'
+            font_style: 'Title'
+            role: 'medium'
+            halign: 'justify'
+            text_color: 1, 1, 1, 1
+            padding: [10, 3, 10, 10]
+    
+    # ! Contact Us - - - - - - - - - - - -
+    MDBoxLayout:
+        size_hint: 0.89, 0.1
+        md_bg_color: 1, 1, 1, 0.2
+        pos_hint: {'center_x': 0.5, 'center_y': 0.05}
+        orientation: 'horizontal'
+        radius: [8, 8, 8, 8]
+
+        MDLabel:
+            text: 'Contact Us'
+            font_style: 'Title'
+            role: 'medium'
+            bold: True
+            halign: 'left'
+            text_color: 1, 1, 1, 1
+            padding: [10, 0, 0, 0]
+        
+        MDLabel:
+            text: 'ForestTimer@gmail.com'
+            font_style: 'Title'
+            role: 'medium'
+            halign: 'right'
+            text_color: 1, 1, 1, 1
+            padding: [0, 0, 10, 0]
