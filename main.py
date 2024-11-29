@@ -125,10 +125,17 @@ class ForestApp(MDApp):
         if login_textfield.text != '' and login_passfield != '':
             if login_textfield.text in self.read_user_database() and self.read_user_database()[
                 login_textfield.text] == login_passfield.text:
-                print("Logged in successfully")
+                
+                self.show_success_dialog()
+
+                self.current_user = login_textfield.text
+                
                 self.root.current = 'dashboard'
             else:
-                print("Invalid Credentials")
+                MDDialog(MDDialogIcon(icon='alert-circle'),
+                     MDDialogHeadlineText(text='Invalid Credentials'),
+                     MDDialogSupportingText(
+                         text='Re-enter your details or create an account if you\'re new here.')).open()
 
     # ! Signup Attempt - - - - - - - - - - - -
     def attempt_signup(self):
@@ -142,7 +149,7 @@ class ForestApp(MDApp):
                 if signup_textfield.text not in self.read_user_database().keys():
                     self.update_user_database(signup_textfield.text, signup_cfpassfield.text)
 
-                    print("Successfully registered")
+                    self.show_success_dialog()
                     self.root.current = 'login'
 
                     signup_textfield.text = ''
@@ -150,9 +157,15 @@ class ForestApp(MDApp):
                     signup_cfpassfield.text = ''
                 # Else exists
                 else:
-                    print("Account already exists")
+                    MDDialog(MDDialogIcon(icon='account-check'),
+                     MDDialogHeadlineText(text='User ID Taken'),
+                     MDDialogSupportingText(
+                         text='An account with the same User ID already exists. Please try a different User ID.')).open()
             else:
-                print("Passwords do not match")
+                MDDialog(MDDialogIcon(icon='alert-circle'),
+                             MDDialogHeadlineText(text='Mismatched Passwords'),
+                             MDDialogSupportingText(
+                                 text='Double-check for typos to ensure passwords are identical.')).open()
 
     # ! Success Dialog Sequence - - - - - - - - - - - -
     def show_success_dialog(self):
