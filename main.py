@@ -217,7 +217,7 @@ class ForestApp(MDApp):
             ),
             MDDialogContentContainer(
                 MDRelativeLayout(
-                    Builder.load_file(),
+                    Builder.load_file('kv-files/settings_dialog.kv'),
                     size_hint=(None, None),
                     size=(650, 550),
                     pos_hint={'center_x': 0.5, 'center_y': 0.6}
@@ -248,7 +248,7 @@ class ForestApp(MDApp):
                 halign="center",
             ),
             MDDialogContentContainer(
-                Builder.load_file(),
+                Builder.load_file('kv-files/help_dialog.kv'),
                 size_hint=(1, 1),
                 orientation='vertical'
             ),
