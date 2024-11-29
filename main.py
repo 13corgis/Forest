@@ -83,6 +83,20 @@ class ForestApp(MDApp):
 
     def to_login(self):
         self.root.current = 'login'
+
+    # ! Change Dashboard Opacity on Dialog.open() and Dialog.dismiss() - - - - - - - - - - - -
+    def change_opacity(self):
+        components = [
+            self.root.get_screen('dashboard').ids.timer_label,
+            self.root.get_screen('dashboard').ids.dash_btns
+        ]
+
+        for comp in components:
+            opacity = comp.opacity
+            if opacity == 1 or opacity == 0.6:
+                comp.opacity = 0
+            elif opacity == 0:
+                comp.opacity = 1
     
     # ! Selected Background Tracker - - - - - - - - - - - -
     def manage_background(self, action):
