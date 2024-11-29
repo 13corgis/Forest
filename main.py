@@ -151,7 +151,13 @@ class ForestApp(MDApp):
     def update_user_database(self, username, password):
         with open('resources/db.txt', mode='a') as file:
             file.write(f'\n{username},{password}')
-    
+            
+    # ! Profile menu > logout - - - - - - - - - - - -
+    def logout(self):
+        self.root.get_screen('login').ids.login_passfield.text = ''
+        self.root.current = 'login'
+        self.menu.dismiss()
+        
     # ! Initialize Profile Menu - - - - - - - - - - - -
     def init_profile_menu(self):
         self.menu = MDDropdownMenu(
