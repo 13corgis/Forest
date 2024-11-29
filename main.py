@@ -5,6 +5,8 @@ from kivy.uix.image import AsyncImage
 from kivy.uix.screenmanager import FadeTransition
 from kivy.clock import Clock
 from kivymd.uix.menu import MDDropdownMenu
+from kivymd.uix.dialog import *
+from kivymd.uix.relativelayout import MDRelativeLayout
 
 from screeninfo import get_monitors
 
@@ -200,6 +202,39 @@ class ForestApp(MDApp):
             item['on_release'] = self.menu.dismiss
 
         self.menu.items = menu_items
+    
+    # ! Initialize Settings Dialog - - - - - - - - - - - -
+    def init_settings_dialog(self):
+
+        self.settings_dialog = MDDialog(
+            MDDialogHeadlineText(
+                font_style='Headline',
+                bold=True,
+                theme_text_color="Custom",
+                text_color=(1, 1, 1, 1),
+                text="Settings",
+                halign="center"
+            ),
+            MDDialogContentContainer(
+                MDRelativeLayout(
+                    Builder.load_file(),
+                    size_hint=(None, None),
+                    size=(650, 550),
+                    pos_hint={'center_x': 0.5, 'center_y': 0.6}
+                ),
+                size_hint=(1, 1),
+                orientation='vertical'
+            ),
+            size_hint=(None, None),
+            size=(650, 550),
+            style='outlined',
+            theme_bg_color='Custom',
+            md_bg_color=(0, 0, 0, 0.0),
+            orientation='vertical'
+        )
+
+        # self.settings_dialog.on_open
+        # self.settings_dialog.on_dismiss
     
     # ! Initialize Background Resources - - - - - - - - - - - -
     def init_bg_images(self):
