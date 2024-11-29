@@ -43,3 +43,18 @@ class Timer:
             self.app_instance.get_timer_label().text = f"{self.work_minutes}:00"
 
         self.start_timer()
+
+    def default_timer_settings(self):
+        self.stop_timer()
+
+        self.work_minutes = 25
+        self.break_minutes = 5
+
+        self.timer_seconds = self.work_minutes * 60
+        self.timer_period = 'work'
+        self.tick_event = None
+
+        self.app_instance.root.get_screen(
+            'dashboard').ids.timer_label.text = f'0{self.work_minutes}:00' if self.work_minutes < 10 else f'{self.work_minutes}:00'
+        self.app_instance.root.get_screen(
+            'setup').ids.timer_preview.text = f'0{self.work_minutes}:00' if self.work_minutes < 10 else f'{self.work_minutes}:00'
