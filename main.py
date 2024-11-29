@@ -235,6 +235,33 @@ class ForestApp(MDApp):
 
         # self.settings_dialog.on_open
         # self.settings_dialog.on_dismiss
+
+    # ! Initialize Help Dialog - - - - - - - - - - - -
+    def init_help_dialog(self):
+        self.help_dialog = MDDialog(
+            MDDialogHeadlineText(
+                font_style='Headline',
+                bold=True,
+                theme_text_color="Custom",
+                text_color=(1, 1, 1, 1),
+                text="About",
+                halign="center",
+            ),
+            MDDialogContentContainer(
+                Builder.load_file(),
+                size_hint=(1, 1),
+                orientation='vertical'
+            ),
+            size_hint=(None, None),
+            size=(650, 400),
+            style='outlined',
+            theme_bg_color='Custom',
+            md_bg_color=(0, 0, 0, 0.0),
+            orientation='vertical'
+        )
+
+        # self.help_dialog.on_pre_open
+        # self.help_dialog.on_dismiss
     
     # ! Initialize Background Resources - - - - - - - - - - - -
     def init_bg_images(self):
