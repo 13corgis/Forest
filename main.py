@@ -7,6 +7,7 @@ from kivy.clock import Clock
 from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.dialog import *
 from kivymd.uix.relativelayout import MDRelativeLayout
+from pomodoro_timer import Timer
 
 from screeninfo import get_monitors
 
@@ -39,6 +40,9 @@ def init_window():
 class ForestApp(MDApp):
     def __init__(self, **kwargs):
         super(ForestApp, self).__init__(**kwargs)
+
+        # Timer
+        self.timer = Timer(self)
         
         # Member Variables - Background
         self.app_bg = 'resources/test.mp4'
