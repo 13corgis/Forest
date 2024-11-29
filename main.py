@@ -49,6 +49,11 @@ class ForestApp(MDApp):
             'resources/bg_6.jpg'
         ]
         self.selected_bg = 0
+        
+        # Member Variables - Menu Components
+        self.menu = None
+        self.settings_dialog = None
+        self.help_dialog = None
     
     def build(self):
         Window.hide()
