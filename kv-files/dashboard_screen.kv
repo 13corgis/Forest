@@ -57,6 +57,7 @@
             on_release:
 
                 # ----------------i.e., start timer if no timer event, else stop----------------
+                app.timer.start_timer() if app.timer.tick_event is None else app.timer.stop_timer()
 
 
             MDButtonIcon:
