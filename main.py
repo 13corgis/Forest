@@ -4,6 +4,7 @@ from kivy.lang import Builder
 from kivy.uix.image import AsyncImage
 from kivy.uix.screenmanager import FadeTransition
 from kivy.clock import Clock
+from kivymd.uix.menu import MDDropdownMenu
 
 from screeninfo import get_monitors
 
@@ -150,6 +151,45 @@ class ForestApp(MDApp):
     def update_user_database(self, username, password):
         with open('resources/db.txt', mode='a') as file:
             file.write(f'\n{username},{password}')
+    
+    # ! Initialize Profile Menu - - - - - - - - - - - -
+    def init_profile_menu(self):
+        self.menu = MDDropdownMenu(
+            id='menu',
+            caller=self.root.get_screen('dashboard').ids.profile,
+            width='120dp',
+            position='bottom',
+            ver_growth='down',
+            hor_growth='right',
+            radius=[16, 16, 16, 16],
+            opacity=0.85
+        )
+
+        settings_item = {
+            'text': 'Settings',
+            'leading_icon': 'cog',
+            'on_press': self.settings_dialog.open
+        }
+        help_item = {
+            'text': 'Help',
+            'leading_icon': 'help',
+            'on_press': self.help_dialog.open
+        }
+        logout_item = {
+            'text': 'Logout',
+            'leading_icon': 'logout',
+            'on_press': self.logout
+        }
+
+        menu_items = [settings_item, help_item, logout_item]
+
+        for item in menu_items:
+            item['md_bg_color'] = (0, 0, 0, 1)
+            item['text_color'] = (1, 1, 1, 1)
+            item['leading_icon_color'] = (1, 1, 1, 1)
+            item['on_release'] = self.menu.dismiss
+
+        self.menu.items = menu_items
     
     # ! Initialize Background Resources - - - - - - - - - - - -
     def init_bg_images(self):
