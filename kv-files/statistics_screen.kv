@@ -1,0 +1,87 @@
+<StatisticsScreen@MDScreen>:
+    Video:
+        id: statistics_bg
+        source: app.bg_paths[0]
+        state: 'play'
+        options: {'eos': 'loop'}
+        fit_mode: 'cover'
+        mipmap: True
+
+    MDRelativeLayout:
+
+        MDSwiper:
+            id: charts
+            size_hint_y: None
+            height: root.height - dp(360)
+            pos_hint: {'center_x':0.5, 'center_y':0.5}
+            transition_duration: 0.45
+
+            # Radial Chart -------------------------------------------------------
+            MDSwiperItem:
+                FitImage:
+                    id: chart_1
+                    source: "resources/profile.png"
+                    fit_mode: 'contain'
+                    radius: [20]
+                    mipmap: True
+
+            # Bar Chart with Rolling Mean -------------------------------------------------------
+            MDSwiperItem:
+                FitImage:
+                    id: chart_2
+                    source: "resources/profile.png"
+                    fit_mode: 'contain'
+                    radius: [20]
+                    mipmap: True
+
+        # Previous Setup -------------------------------------------------------
+        MDIconButton:
+            icon: 'chevron-left'
+
+            pos_hint: {'center_x':0.05, 'center_y':0.5}
+
+            style: 'standard'
+
+            theme_bg_color: 'Custom'
+            md_bg_color: 0, 0, 0, 0
+
+            theme_icon_color: 'Custom'
+            icon_color: 1, 1, 1, 1
+
+            on_press:
+                app.root.get_screen('statistics').ids.charts.swipe_left()
+
+        # Next Setup -------------------------------------------------------
+        MDIconButton:
+            icon: 'chevron-right'
+
+            pos_hint: {'center_x':0.95, 'center_y':0.5}
+
+            style: 'standard'
+
+            theme_bg_color: 'Custom'
+            md_bg_color: 0, 0, 0, 0
+
+            theme_icon_color: 'Custom'
+            icon_color: 1, 1, 1, 1
+
+            on_press:
+                app.root.get_screen('statistics').ids.charts.swipe_right()
+
+        # Exit Statistics Screen -------------------------------------------------------
+        MDIconButton:
+            style: 'outlined'
+            icon: 'backburger'
+
+            pos_hint: {'center_x': 0.05, 'center_y': 0.925}
+
+            style: 'standard'
+
+            theme_bg_color: 'Custom'
+            md_bg_color: 0, 0, 0, 1
+
+            theme_icon_color: 'Custom'
+            icon_color: 1, 1, 1, 1
+
+            on_press:
+                app.root.current = 'dashboard'
