@@ -324,6 +324,7 @@ class ForestApp(MDApp):
         Builder.load_file('kv-files/login_screen.kv')
         Builder.load_file('kv-files/dashboard_screen.kv')
         Builder.load_file('kv-files/setup_screen.kv')
+        Builder.load_file('kv-files/statistics_screen.kv')
 
     # ! Get Timer Label - - - - - - - - - - - -
     def get_timer_label(self):
