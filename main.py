@@ -115,53 +115,60 @@ class ForestApp(MDApp):
     
     # ! Login Attempt - - - - - - - - - - - -
     def attempt_login(self):
-        login_textfield = self.root.get_screen('login').ids.login_textfield
-        login_passfield = self.root.get_screen('login').ids.login_passfield
+        login_textfield_input = self.root.get_screen('login').ids.login_textfield.text
+        login_passfield_input = self.root.get_screen('login').ids.login_passfield.text
 
-        if login_textfield.text != '' and login_passfield != '':
-            if login_textfield.text in self.read_user_database() and self.read_user_database()[
-                login_textfield.text] == login_passfield.text:
-                
-                self.show_success_dialog()
+        if self.collection.find_one({'user_id': login_textfield_input, 'password': login_passfield_input}) is not None:
 
-                self.current_user = login_textfield.text
-                
-                self.root.current = 'dashboard'
-            else:
-                MDDialog(MDDialogIcon(icon='alert-circle'),
+            self.show_success_dialog()
+
+            self.current_user = login_textfield_input
+
+            # ! <For the UserStatistics class in the future>
+
+            self.update_user_session_data()
+
+            self.root.current = 'dashboard'
+        else:
+            MDDialog(MDDialogIcon(icon='alert-circle'),
                      MDDialogHeadlineText(text='Invalid Credentials'),
                      MDDialogSupportingText(
                          text='Re-enter your details or create an account if you\'re new here.')).open()
 
     # ! Signup Attempt - - - - - - - - - - - -
     def attempt_signup(self):
-        signup_textfield = self.root.get_screen('login').ids.signup_textfield
-        signup_passfield = self.root.get_screen('login').ids.signup_passfield
-        signup_cfpassfield = self.root.get_screen('login').ids.signup_cfpassfield
+        signup_textfield_input = self.root.get_screen('login').ids.signup_textfield.text
+        signup_passfield_input = self.root.get_screen('login').ids.signup_passfield.text
+        signup_cfpassfield_input = self.root.get_screen('login').ids.signup_cfpassfield.text
 
-        if signup_textfield.text != '' and signup_passfield.text != '' and signup_cfpassfield.text != '':
-            if signup_passfield.text == signup_cfpassfield.text:
-                # IF user and pass not in db
-                if signup_textfield.text not in self.read_user_database().keys():
-                    self.update_user_database(signup_textfield.text, signup_cfpassfield.text)
-
-                    self.show_success_dialog()
-                    self.root.current = 'login'
-
-                    signup_textfield.text = ''
-                    signup_passfield.text = ''
-                    signup_cfpassfield.text = ''
-                # Else exists
-                else:
-                    MDDialog(MDDialogIcon(icon='account-check'),
+        if self.collection.find_one({'user_id': signup_textfield_input}) is not None:
+            MDDialog(MDDialogIcon(icon='account-check'),
                      MDDialogHeadlineText(text='User ID Taken'),
                      MDDialogSupportingText(
                          text='An account with the same User ID already exists. Please try a different User ID.')).open()
-            else:
-                MDDialog(MDDialogIcon(icon='alert-circle'),
+        else:
+            if len(signup_textfield_input) >= 3 and len(signup_passfield_input) >= 3:
+                if signup_passfield_input == signup_cfpassfield_input:
+                    self.collection.insert_one(
+                        {'user_id': signup_textfield_input, 'password': signup_passfield_input, 'sessions': []})
+
+                    self.show_success_dialog()
+                else:
+                    MDDialog(MDDialogIcon(icon='alert-circle'),
                              MDDialogHeadlineText(text='Mismatched Passwords'),
                              MDDialogSupportingText(
                                  text='Double-check for typos to ensure passwords are identical.')).open()
+            else:
+                if len(signup_textfield_input) < 3:
+                    MDDialog(MDDialogIcon(icon='alert-circle'),
+                             MDDialogHeadlineText(text='Invalid User ID'),
+                             MDDialogSupportingText(
+                                 text='User ID must be at least 3 characters long.')).open()
+                if len(signup_passfield_input) < 3:
+                    MDDialog(MDDialogIcon(icon='alert-circle'),
+                             MDDialogHeadlineText(text='Invalid Password'),
+                             MDDialogSupportingText(
+                                 text='Password must be at least 3 characters long.')).open()
     
     # ! Startup Sequence - - - - - - - - - - - -
     def enter_app(self):
