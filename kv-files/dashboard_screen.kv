@@ -3,9 +3,12 @@
 #:import Window kivy.core.window.Window
 
 <DashboardScreen@Screen>:
-    FitImage:
+    Video:
         id: dashboard_bg
         source: app.bg_paths[0]
+        state: 'play'
+        options: {'eos': 'loop'}
+        fit_mode: 'cover'
         mipmap: True
 
     Profile:

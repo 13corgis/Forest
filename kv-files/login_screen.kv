@@ -3,10 +3,12 @@
 
 <LoginScreen@Screen>:
     Video:
-        source: app.app_bg
+        id: login_bg
+        source: app.bg_paths[0]
         state: 'play'
         options: {'eos': 'loop'}
         fit_mode: 'cover'
+        mipmap: True
         
     MDLabel:
         text: 'Forest'

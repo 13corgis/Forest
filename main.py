@@ -45,15 +45,15 @@ class ForestApp(MDApp):
         self.timer = Timer(self)
         
         # Member Variables - Background
-        self.app_bg = 'resources/test.mp4'
+        self.startup_sequence = 'resources/setup_startup.mp4'
         self.bg_paths = [
-            'resources/bg_0.jpg',
-            'resources/bg_1.jpg',
-            'resources/bg_2.jpg',
-            'resources/bg_3.jpg',
-            'resources/bg_4.jpg',
-            'resources/bg_5.jpg',
-            'resources/bg_6.jpg'
+            'resources/setup_0.mp4',
+            'resources/setup_1.mp4',
+            'resources/setup_2.mp4',
+            'resources/setup_3.mp4',
+            'resources/setup_4.mp4',
+            'resources/setup_5.mp4',
+            'resources/setup_6.mp4'
         ]
         self.selected_bg = 0
         
@@ -67,7 +67,7 @@ class ForestApp(MDApp):
         
         self.load_kv_files()
         
-        Clock.schedule_once(lambda dt: self.enter_app(), 3)
+        Clock.schedule_once(lambda dt: self.enter_app(), 5)
         
         return Builder.load_file('kv-files/forest.kv')
 
@@ -83,10 +83,11 @@ class ForestApp(MDApp):
     
     # ! Startup Sequence - - - - - - - - - - - -
     def enter_app(self):
-        self.root.transition = FadeTransition(duration=2)
+        self.root.transition = FadeTransition(duration=1)
         self.root.current = 'startup'
+        self.root.get_screen('startup').ids.intro.state = 'play'
         self.root.transition = FadeTransition(duration=0.3)
-        Clock.schedule_once(lambda dt: self.to_login(), 4)
+        Clock.schedule_once(lambda dt: self.to_login(), 6)
 
     def to_login(self):
         self.root.current = 'login'
@@ -312,7 +313,7 @@ class ForestApp(MDApp):
     
     # ! Initialize Background Resources - - - - - - - - - - - -
     def init_bg_images(self):
-        image = AsyncImage(source=self.app_bg)
+        image = AsyncImage(source=self.startup_sequence)
 
         for path in self.bg_paths:
             image = AsyncImage(source=path)

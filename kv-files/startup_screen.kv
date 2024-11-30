@@ -1,16 +1,7 @@
 <StartupScreen@Screen>:
     Video:
-        source: app.app_bg
-        state: 'play'
-        options: {'eos': 'loop'}
+        id: intro
+        source: app.startup_sequence
+        options: {'eos': 'stop'}
         fit_mode: 'cover'
-        
-    MDLabel:
-        text: 'Forest'
-        halign: 'center'
-        theme_text_color: "Custom"
-        text_color: (1, 1, 1, 1)
-        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-        font_style: 'Display'
-        role: 'large'
-        bold: True
+        mipmap: True
