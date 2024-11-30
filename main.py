@@ -94,6 +94,24 @@ class ForestApp(MDApp):
         self.init_profile_menu()
         
         Clock.schedule_once(lambda dt: Window.show(), 0)
+
+    # ! Update User Session Data per Timer Tick - - - - - - - - - - - -
+    def update_user_session_data(self):
+
+        if self.collection.find_one({'user_id': self.current_user, 'sessions.session_id': self.date_today}) is None:
+            # ! Log today as a session
+            self.collection.update_one({'user_id': self.current_user}, {
+                '$push': {'sessions': {'session_id': self.date_today, 'total_work_time': 0, 'total_break_time': 0}}})
+        else:
+            # ! There is an existing session for today
+            # ! So update total work time
+            if self.timer.timer_period == 'work':
+                self.collection.update_one({'user_id': self.current_user, 'sessions.session_id': self.date_today},
+                                      {'$inc': {'sessions.$.total_work_time': 1}})
+            # ! Break period
+            elif self.timer.timer_period == 'break':
+                self.collection.update_one({'user_id': self.current_user, 'sessions.session_id': self.date_today},
+                                      {'$inc': {'sessions.$.total_break_time': 1}})
     
     # ! Startup Sequence - - - - - - - - - - - -
     def enter_app(self):
