@@ -8,7 +8,8 @@ from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.dialog import *
 from kivymd.uix.relativelayout import MDRelativeLayout
 from pomodoro_timer import Timer
-
+from pymongo import MongoClient
+from datetime import datetime
 from screeninfo import get_monitors
 
 # ! Configure Window - - - - - - - - - - - -
@@ -40,6 +41,19 @@ def init_window():
 class ForestApp(MDApp):
     def __init__(self, **kwargs):
         super(ForestApp, self).__init__(**kwargs)
+        # ! Database Connector - - - - - - - - - - - -
+        try:
+            self._uri = "mongodb+srv://treeInForest:IAmATree@forest.htdun.mongodb.net/?retryWrites=true&w=majority&appName=Forest"
+            self._client = MongoClient(self._uri)
+            self._database = self._client["test"]
+            self.collection = self._database["users"]
+
+            self.date_today = datetime.today().strftime("%Y-%m-%d")
+        except Exception as e:
+            raise Exception(
+                "The following error occurred: ", e)
+
+        self.current_user = None
 
         # Timer
         self.timer = Timer(self)
