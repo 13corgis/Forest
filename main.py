@@ -81,7 +81,7 @@ class ForestApp(MDApp):
         
         self.load_kv_files()
         
-        Clock.schedule_once(lambda dt: self.enter_app(), 5)
+        Clock.schedule_once(lambda dt: self.enter_app(), 6.5)
         
         return Builder.load_file('kv-files/forest.kv')
 
@@ -112,47 +112,6 @@ class ForestApp(MDApp):
             elif self.timer.timer_period == 'break':
                 self.collection.update_one({'user_id': self.current_user, 'sessions.session_id': self.date_today},
                                       {'$inc': {'sessions.$.total_break_time': 1}})
-    
-    # ! Startup Sequence - - - - - - - - - - - -
-    def enter_app(self):
-        self.root.transition = FadeTransition(duration=1)
-        self.root.current = 'startup'
-        self.root.get_screen('startup').ids.intro.state = 'play'
-        self.root.transition = FadeTransition(duration=0.3)
-        Clock.schedule_once(lambda dt: self.to_login(), 6)
-
-    def to_login(self):
-        self.root.current = 'login'
-
-    # ! Change Dashboard Opacity on Dialog.open() and Dialog.dismiss() - - - - - - - - - - - -
-    def change_opacity(self):
-        components = [
-            self.root.get_screen('dashboard').ids.timer_label,
-            self.root.get_screen('dashboard').ids.dash_btns
-        ]
-
-        for comp in components:
-            opacity = comp.opacity
-            if opacity == 1 or opacity == 0.6:
-                comp.opacity = 0
-            elif opacity == 0:
-                comp.opacity = 1
-    
-    # ! Selected Background Tracker - - - - - - - - - - - -
-    def manage_background(self, action):
-
-        if action == 'next':
-            if self.selected_bg == 6:
-                self.selected_bg = 0
-            else:
-                self.selected_bg += 1
-        elif action == 'prev':
-            if self.selected_bg == 0:
-                self.selected_bg = 6
-            else:
-                self.selected_bg -= 1
-
-        self.root.get_screen('setup').ids.setup_bg.source = self.bg_paths[self.selected_bg]
     
     # ! Login Attempt - - - - - - - - - - - -
     def attempt_login(self):
@@ -203,32 +162,18 @@ class ForestApp(MDApp):
                              MDDialogHeadlineText(text='Mismatched Passwords'),
                              MDDialogSupportingText(
                                  text='Double-check for typos to ensure passwords are identical.')).open()
-
-    # ! Success Dialog Sequence - - - - - - - - - - - -
-    def show_success_dialog(self):
-        success_dialog = MDDialog(MDDialogIcon(icon='check-circle', role='large'), theme_bg_color='Custom',
-                                  md_bg_color=(0, 0, 0, 0))
-        success_dialog.open()
-
-        Clock.schedule_once(lambda dt: success_dialog.dismiss(), 1)
     
-    # ! Database Interactions (Read, Update) - - - - - - - - - - - -
-    def read_user_database(self):
-        with open('resources/db.txt', mode='r') as file:
-            db = {}
-            for pair in file.readlines():
-                username = pair.split(sep=',')[0]
-                password = pair.split(sep=',')[1].strip()
-                db[username] = password
+    # ! Startup Sequence - - - - - - - - - - - -
+    def enter_app(self):
+        self.root.transition = FadeTransition(duration=1)
+        self.root.current = 'startup'
+        self.root.get_screen('startup').ids.intro.state = 'play'
+        self.root.transition = FadeTransition(duration=0.3)
+        Clock.schedule_once(lambda dt: self.to_login(), 6)
 
-            print(db)
-
-            return db
-
-    def update_user_database(self, username, password):
-        with open('resources/db.txt', mode='a') as file:
-            file.write(f'\n{username},{password}')
-            
+    def to_login(self):
+        self.root.current = 'login'
+        
     # ! Profile menu > logout - - - - - - - - - - - -
     def logout(self):
         self.timer.default_timer_settings()
@@ -243,6 +188,44 @@ class ForestApp(MDApp):
     # ! Profile Menu - - - - - - - - - - - -
     def open_profile_menu(self):
         self.menu.open()
+
+    # ! Success Dialog Sequence - - - - - - - - - - - -
+    def show_success_dialog(self):
+        success_dialog = MDDialog(MDDialogIcon(icon='check-circle', role='large'), theme_bg_color='Custom',
+                                  md_bg_color=(0, 0, 0, 0))
+        success_dialog.open()
+
+        Clock.schedule_once(lambda dt: success_dialog.dismiss(), 1)
+
+    # ! Change Dashboard Opacity on Dialog.open() and Dialog.dismiss() - - - - - - - - - - - -
+    def change_opacity(self):
+        components = [
+            self.root.get_screen('dashboard').ids.timer_label,
+            self.root.get_screen('dashboard').ids.dash_btns
+        ]
+
+        for comp in components:
+            opacity = comp.opacity
+            if opacity == 1 or opacity == 0.6:
+                comp.opacity = 0
+            elif opacity == 0:
+                comp.opacity = 1
+    
+    # ! Selected Background Tracker - - - - - - - - - - - -
+    def manage_background(self, action):
+
+        if action == 'next':
+            if self.selected_bg == 6:
+                self.selected_bg = 0
+            else:
+                self.selected_bg += 1
+        elif action == 'prev':
+            if self.selected_bg == 0:
+                self.selected_bg = 6
+            else:
+                self.selected_bg -= 1
+
+        self.root.get_screen('setup').ids.setup_bg.source = self.bg_paths[self.selected_bg]
         
     # ! Initialize Profile Menu - - - - - - - - - - - -
     def init_profile_menu(self):
