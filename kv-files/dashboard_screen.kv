@@ -1,6 +1,7 @@
 #:import SlideTransition kivy.uix.screenmanager.SlideTransition
 #:import FadeTransition kivy.uix.screenmanager.FadeTransition
 #:import Window kivy.core.window.Window
+#:import Clock kivy.clock.Clock
 
 <DashboardScreen@Screen>:
     Video:
@@ -25,7 +26,7 @@
 
     MDLabel:
         id: timer_label
-        text: '25:00'
+        text: f'0{app.timer.work_minutes}:00' if app.timer.work_minutes<10 else f'{app.timer.work_minutes}:00'
         halign: 'center'
         theme_text_color: "Custom"
         text_color: (1, 1, 1, 1)
@@ -39,21 +40,24 @@
         adaptive_size: True
         md_bg_color: 0, 0, 0, 1
         opacity: 0.6
-        pos_hint: {'center_x': 0.5, 'center_y': 0.1}
+        pos_hint: {'center_x': 0.5, 'center_y': 0.05}
         radius: [dp(16), ]
 
         # Setup ------------------------------------------------
         MDButton:
             style: 'text'
-            on_press: 
-                app.root.transition = FadeTransition(duration=0.2)
+            on_press:
+                app.root.transition = FadeTransition(duration=0.5)
 
             theme_bg_color: 'Custom'
             md_bg_color: 0, 0, 0, 0
 
+            theme_icon_color: 'Custom'
+            icon_color: 1, 1, 1, 1
+
             on_release:
                 app.root.current = 'setup'
-                app.root.transition = SlideTransition(duration=0.25)
+                app.root.transition = FadeTransition(duration=0.25)
                 Window.borderless=1
 
             MDButtonIcon:
@@ -66,8 +70,10 @@
             theme_bg_color: 'Custom'
             md_bg_color: 0, 0, 0, 0
 
-            on_release:
+            theme_icon_color: 'Custom'
+            icon_color: 1, 1, 1, 1
 
+            on_release:
                 # ----------------i.e., start timer if no timer event, else stop----------------
                 app.timer.start_timer() if app.timer.tick_event is None else app.timer.stop_timer()
 
@@ -81,6 +87,9 @@
             style: 'text'
             theme_bg_color: 'Custom'
             md_bg_color: 0, 0, 0, 0
+
+            theme_icon_color: 'Custom'
+            icon_color: 1, 1, 1, 1
 
             on_press:
                 app.user_statistics.update_user_stats()
@@ -100,6 +109,13 @@
     size: 50, 50
     radius: self.width / 2
     pos_hint: {'center_x': 0.05, 'center_y': 0.925}
+
+    FitImage:
+        source: 'resources/profile.png'
+        size_hint: 1, 1
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+        radius: self.width / 2
 
     MDButton:
         style: 'outlined'
