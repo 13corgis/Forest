@@ -12,12 +12,19 @@
         MDSwiper:
             id: charts
             size_hint_y: None
-            height: root.height - dp(360)
+            height: root.height - dp(300)
             pos_hint: {'center_x':0.5, 'center_y':0.5}
             transition_duration: 0.45
 
             # Radial Chart -------------------------------------------------------
             MDSwiperItem:
+                size_hint: 0.7, 1
+                md_bg_color: 1, 1, 1, 0.45
+                padding: [0, 40, 0, 40]
+                line_color: 1, 1, 1, 0.5
+                line_width: 2
+                radius: [20]
+
                 FitImage:
                     id: chart_1
                     source: "resources/profile.png"
@@ -27,6 +34,13 @@
 
             # Bar Chart with Rolling Mean -------------------------------------------------------
             MDSwiperItem:
+                size_hint: 0.7, 1
+                md_bg_color: 1, 1, 1, 0.45
+                padding: [0, 40, 0, 40]
+                line_color: 1, 1, 1, 0.5
+                line_width: 2
+                radius: [20]
+
                 FitImage:
                     id: chart_2
                     source: "resources/profile.png"
