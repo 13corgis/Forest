@@ -9,6 +9,7 @@ MDSmartTile:
         pos_hint: {'center_x':0.26,'center_y':0.75}
         opacity: 0.6
         on_press:
+            app.timer.set_timer_settings(25, 5)
 
     MDSmartTileImage:
         mipmap: True
@@ -18,6 +19,7 @@ MDSmartTile:
         pos_hint: {'center_x':0.74,'center_y':0.75}
         opacity: 0.6
         on_press:
+            app.timer.set_timer_settings(30, 10)
 
     MDSmartTileImage:
         mipmap: True
@@ -27,6 +29,7 @@ MDSmartTile:
         pos_hint: {'center_x':0.26,'center_y':0.25}
         opacity: 0.6
         on_press:
+            app.timer.set_timer_settings(40, 10)
 
     MDSmartTileImage:
         mipmap: True
@@ -36,3 +39,4 @@ MDSmartTile:
         pos_hint: {'center_x':0.74,'center_y':0.25}
         opacity: 0.6
         on_press:
+            app.timer.set_timer_settings(50, 5)
