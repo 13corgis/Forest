@@ -11,6 +11,7 @@ from pomodoro_timer import Timer
 from pymongo import MongoClient
 from datetime import datetime
 from screeninfo import get_monitors
+from user_statistics import UserStatistics
 
 # ! Configure Window - - - - - - - - - - - -
 def init_window():
@@ -57,6 +58,9 @@ class ForestApp(MDApp):
 
         # Timer
         self.timer = Timer(self)
+
+        # Statistics
+        self.user_statistics = None
         
         # Member Variables - Background
         self.startup_sequence = 'resources/setup_startup.mp4'
@@ -124,7 +128,7 @@ class ForestApp(MDApp):
 
             self.current_user = login_textfield_input
 
-            # ! <For the UserStatistics class in the future>
+            self.user_statistics = UserStatistics(self)
 
             self.update_user_session_data()
 
