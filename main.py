@@ -85,7 +85,7 @@ class ForestApp(MDApp):
         
         self.load_kv_files()
         
-        Clock.schedule_once(lambda dt: self.enter_app(), 6.5)
+        Clock.schedule_once(lambda dt: self.enter_app(), 8)
         
         return Builder.load_file('kv-files/forest.kv')
 
