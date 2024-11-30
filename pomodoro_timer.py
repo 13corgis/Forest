@@ -19,7 +19,10 @@ class Timer:
     def count_down(self, dt):
         if self.timer_seconds > 0:
 
+            self.app_instance.update_user_session_data()
+
             self.timer_seconds -= 1
+            
             minutes, seconds = divmod(self.timer_seconds, 60)
             self.app_instance.get_timer_label().text = f"{minutes:02}:{seconds:02}"
         else:
@@ -58,3 +61,25 @@ class Timer:
             'dashboard').ids.timer_label.text = f'0{self.work_minutes}:00' if self.work_minutes < 10 else f'{self.work_minutes}:00'
         self.app_instance.root.get_screen(
             'setup').ids.timer_preview.text = f'0{self.work_minutes}:00' if self.work_minutes < 10 else f'{self.work_minutes}:00'
+
+    def sync_timer_changes(self):
+
+        self.app_instance.root.get_screen(
+            'dashboard').ids.timer_label.text = f'0{self.work_minutes}:00' if self.work_minutes < 10 else f'{self.work_minutes}:00'
+        self.app_instance.root.get_screen(
+            'setup').ids.timer_preview.text = f'0{self.work_minutes}:00' if self.work_minutes < 10 else f'{self.work_minutes}:00'
+
+        self.app_instance.settings_dialog.dismiss()
+        self.app_instance.show_success_dialog()
+
+    def set_timer_settings(self, work_time, break_time):
+        self.stop_timer()
+
+        self.work_minutes = work_time
+        self.break_minutes = break_time
+        self.timer_seconds = self.work_minutes * 60
+
+        self.timer_period = 'work'
+        self.tick_event = None
+
+        self.sync_timer_changes()
