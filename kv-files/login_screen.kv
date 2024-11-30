@@ -9,50 +9,60 @@
         options: {'eos': 'loop'}
         fit_mode: 'cover'
         mipmap: True
-        
-    MDLabel:
-        text: 'Forest'
-        theme_text_color: 'Custom'
-        text_color: 'white'
-        pos_hint: {'center_x': 0.5, 'center_y': 0.9}
-        halign: 'center'
-        font_style: 'Headline'
-        outline_color: (0, 0, 0, 0.1)
-        outline_width: 1
-
 
     MDCard:
-        opacity: 0.85
+        id: login_card
+        size_hint: 0.35, 0.5
         padding: 20
         spacing: 5
-        size_hint: 0.5, 0.7
         pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+        style: 'outlined'
+        theme_bg_color: 'Custom'
+        md_bg_color: 0, 0, 0, 0.3
 
         MDRelativeLayout:
 
             MDSegmentedButton:
                 id: seg_btn
+                selected_icon_color: 0, 0, 0, 1
                 pos_hint: {'center_x': 0.5, 'center_y': 0.9}
 
-                # Login Form------------------------------------------------------------------------
+                # Go to Login Form------------------------------------------------------------------------
                 MDSegmentedButtonItem:
+                    ripple_effect: False
+                    selected_color: 1, 1, 1, 0.25
                     active: True
+
                     on_press:
                         app.root.get_screen('login').ids.card_manager.transition = SlideTransition(direction='right', duration=0.22)
                         app.root.get_screen('login').ids.card_manager.current = 'user_login'
 
+                    on_release:
+                        app.root.get_screen('login').ids.login_card.size_hint = 0.35, 0.5
+
                     MDSegmentButtonLabel:
                         text: 'Log In'
+                        theme_text_color: 'Custom'
+                        text_color: 'white'
 
-                # Sign Up Form------------------------------------------------------------------------
+                # Go to Sign Up Form------------------------------------------------------------------------
                 MDSegmentedButtonItem:
+                    ripple_effect: False
+                    selected_color: 1, 1, 1, 0.25
+
                     on_press:
                         app.root.get_screen('login').ids.card_manager.transition = SlideTransition(direction='left', duration=0.22)
                         app.root.get_screen('login').ids.card_manager.current = 'user_signup'
 
+                    on_release:
+                        app.root.get_screen('login').ids.login_card.size_hint = 0.35, 0.65
+
 
                     MDSegmentButtonLabel:
                         text: 'Sign Up'
+                        theme_text_color: 'Custom'
+                        text_color: 'white'
 
 
             ScreenManager:
@@ -69,12 +79,21 @@
                         mode: 'outlined'
                         pos_hint: {'center_y': 0.65}
 
-                        MDTextFieldHintText:
-                            text: 'Username'
+                        theme_text_color: "Custom"
+                        text_color_normal: 'white'
+                        text_color_focus: 'white'
 
-                        MDTextFieldHelperText:
-                            text: 'example@gmail.com'
-                            mode: 'persistent'
+                        theme_line_color: "Custom"
+                        line_color_normal: 1, 1, 1, 0.45
+                        line_color_focus: 'white'
+
+                        theme_bg_color: 'Custom'
+                        fill_color_focus: 1, 1, 1, 0.45
+
+                        MDTextFieldHintText:
+                            text: 'User ID'
+                            text_color_normal: 'white'
+                            text_color_focus: 'white'
 
                     #Password TextField------------------------
                     MDTextField:
@@ -83,18 +102,37 @@
                         pos_hint: {'center_y': 0.35}
                         password: True
 
+                        theme_text_color: "Custom"
+                        text_color_normal: 'white'
+                        text_color_focus: 'white'
+
+                        theme_line_color: "Custom"
+                        line_color_normal: 1, 1, 1, 0.45
+                        line_color_focus: 'white'
+
+                        theme_bg_color: 'Custom'
+                        fill_color_focus: 1, 1, 1, 0.45
+
                         MDTextFieldHintText:
                             text: 'Password'
+                            text_color_normal: 'white'
+                            text_color_focus: 'white'
 
                     #Log In Button------------------------
                     MDButton:
                         id: login_btn
                         style: 'outlined'
                         pos_hint: {'center_x': 0.5, 'center_y': 0.10}
-                        on_press: app.attempt_login()
+
+                        on_press: 
+                            app.attempt_login()
+                            app.root.get_screen('login').ids.login_textfield.text = ''
+                            app.root.get_screen('login').ids.login_passfield.text = ''
 
                         MDButtonText:
                             text: 'Log In'
+                            theme_text_color: 'Custom'
+                            text_color: 'white'
 
                 # Sign Up Form------------------------------------------------------------------------
                 Screen:
@@ -106,12 +144,27 @@
                         mode: 'outlined'
                         pos_hint: {'center_y': 0.7}
 
+                        theme_text_color: "Custom"
+                        text_color_normal: 'white'
+                        text_color_focus: 'white'
+
+                        theme_line_color: "Custom"
+                        line_color_normal: 1, 1, 1, 0.45
+                        line_color_focus: 'white'
+
+                        theme_bg_color: 'Custom'
+                        fill_color_focus: 1, 1, 1, 0.45
+
                         MDTextFieldHintText:
-                            text: 'Username'
+                            text: 'User ID'
+                            text_color_normal: 'white'
+                            text_color_focus: 'white'
 
                         MDTextFieldHelperText:
-                            text: 'example@gmail.com'
+                            text: 'example: Vii'
                             mode: 'persistent'
+                            text_color_normal: 'white'
+                            text_color_focus: 'white'
 
                     #Password TextField------------------------
                     MDTextField:
@@ -120,8 +173,21 @@
                         pos_hint: {'center_y': 0.48}
                         password: True
 
+                        theme_text_color: "Custom"
+                        text_color_normal: 'white'
+                        text_color_focus: 'white'
+
+                        theme_line_color: "Custom"
+                        line_color_normal: 1, 1, 1, 0.45
+                        line_color_focus: 'white'
+
+                        theme_bg_color: 'Custom'
+                        fill_color_focus: 1, 1, 1, 0.45
+
                         MDTextFieldHintText:
                             text: 'Password'
+                            text_color_normal: 'white'
+                            text_color_focus: 'white'
 
                     #Confirm Password TextField------------------------
                     MDTextField:
@@ -130,15 +196,35 @@
                         pos_hint: {'center_y': 0.26}
                         password: True
 
+                        theme_text_color: "Custom"
+                        text_color_normal: 'white'
+                        text_color_focus: 'white'
+
+                        theme_line_color: "Custom"
+                        line_color_normal: 1, 1, 1, 0.45
+                        line_color_focus: 'white'
+
+                        theme_bg_color: 'Custom'
+                        fill_color_focus: 1, 1, 1, 0.45
+
                         MDTextFieldHintText:
                             text: 'Confirm Password'
+                            text_color_normal: 'white'
+                            text_color_focus: 'white'
 
                     #Sign Up Button------------------------
                     MDButton:
                         id: signup_btn
                         style: 'outlined'
                         pos_hint: {'center_x': 0.5, 'center_y': 0.06}
-                        on_press: app.attempt_signup()
+
+                        on_press: 
+                            app.attempt_signup()
+                            app.root.get_screen('login').ids.signup_textfield.text = ''
+                            app.root.get_screen('login').ids.signup_passfield.text = ''
+                            app.root.get_screen('login').ids.signup_cfpassfield.text = ''
 
                         MDButtonText:
                             text: 'Create Account'
+                            theme_text_color: 'Custom'
+                            text_color: 'white'
