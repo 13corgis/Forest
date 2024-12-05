@@ -17,12 +17,11 @@ class Timer:
             self.tick_event = Clock.schedule_interval(self.count_down, 1)
 
     def count_down(self, dt):
-        if self.timer_seconds > 0:
-
+        if self.timer_seconds % 20 == 0:
             self.app_instance.update_user_session_data()
 
+        if self.timer_seconds > 0:
             self.timer_seconds -= 1
-            
             minutes, seconds = divmod(self.timer_seconds, 60)
             self.app_instance.get_timer_label().text = f"{minutes:02}:{seconds:02}"
         else:
@@ -34,8 +33,6 @@ class Timer:
             self.tick_event = None
 
     def shift_period(self):
-        self.stop_timer()
-
         if self.timer_period == 'work':
             self.timer_period = 'break'
             self.timer_seconds = self.break_minutes * 60
