@@ -1,10 +1,11 @@
 #:import MDCard kivymd.uix.card.card
 #:import SlideTransition kivy.uix.screenmanager.SlideTransition
 
+
 <LoginScreen@Screen>:
     Video:
         id: login_bg
-        source: app.bg_paths[0]
+        source: 'resources/setup_0.mp4'
         state: 'play'
         options: {'eos': 'loop'}
         fit_mode: 'cover'
@@ -21,6 +22,10 @@
         theme_bg_color: 'Custom'
         md_bg_color: 0, 0, 0, 0.3
 
+
+        size_duration: 0.5
+        size_transition: 'out_quad'
+
         MDRelativeLayout:
 
             MDSegmentedButton:
@@ -28,7 +33,7 @@
                 selected_icon_color: 0, 0, 0, 1
                 pos_hint: {'center_x': 0.5, 'center_y': 0.9}
 
-                # Go to Login Form------------------------------------------------------------------------
+                # Go To Login Form------------------------------------------------------------------------
                 MDSegmentedButtonItem:
                     ripple_effect: False
                     selected_color: 1, 1, 1, 0.25
@@ -46,7 +51,8 @@
                         theme_text_color: 'Custom'
                         text_color: 'white'
 
-                # Go to Sign Up Form------------------------------------------------------------------------
+
+                # Go To Sign Up Form------------------------------------------------------------------------
                 MDSegmentedButtonItem:
                     ripple_effect: False
                     selected_color: 1, 1, 1, 0.25
@@ -90,6 +96,7 @@
                         theme_bg_color: 'Custom'
                         fill_color_focus: 1, 1, 1, 0.45
 
+
                         MDTextFieldHintText:
                             text: 'User ID'
                             text_color_normal: 'white'
@@ -124,7 +131,7 @@
                         style: 'outlined'
                         pos_hint: {'center_x': 0.5, 'center_y': 0.10}
 
-                        on_press: 
+                        on_press:
                             app.attempt_login()
                             app.root.get_screen('login').ids.login_textfield.text = ''
                             app.root.get_screen('login').ids.login_passfield.text = ''
@@ -218,7 +225,7 @@
                         style: 'outlined'
                         pos_hint: {'center_x': 0.5, 'center_y': 0.06}
 
-                        on_press: 
+                        on_press:
                             app.attempt_signup()
                             app.root.get_screen('login').ids.signup_textfield.text = ''
                             app.root.get_screen('login').ids.signup_passfield.text = ''

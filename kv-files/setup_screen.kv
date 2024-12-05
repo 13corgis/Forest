@@ -4,7 +4,7 @@
 <SetupScreen@Screen>:
     Video:
         id: setup_bg
-        source: app.bg_paths[0]
+        source: 'resources/setup_0.mp4'
         state: 'play'
         options: {'eos': 'loop'}
         fit_mode: 'cover'
@@ -40,23 +40,21 @@
             app.root.get_screen('dashboard').ids.dashboard_bg.source = app.root.get_screen('setup').ids.setup_bg.source
             app.root.get_screen('login').ids.login_bg.source = app.root.get_screen('setup').ids.setup_bg.source
             app.root.get_screen('statistics').ids.statistics_bg.source = app.root.get_screen('setup').ids.setup_bg.source
-            
+
             app.root.current = 'dashboard'
             app.root.transition = FadeTransition(duration=0.1)
             Window.borderless=0
 
     # Previous Setup -------------------------------------------------------
     MDIconButton:
-        id: previous
         icon: 'chevron-left'
 
         pos_hint: {'center_x':0.05, 'center_y':0.5}
 
         style: 'standard'
-        opacity: 0.5
 
         theme_bg_color: 'Custom'
-        md_bg_color: 0, 0, 0, 0.5
+        md_bg_color: 0, 0, 0, 0
 
         theme_icon_color: 'Custom'
         icon_color: 1, 1, 1, 1
@@ -67,16 +65,14 @@
 
     # Next Setup -------------------------------------------------------
     MDIconButton:
-        id: next
         icon: 'chevron-right'
 
         pos_hint: {'center_x':0.95, 'center_y':0.5}
 
         style: 'standard'
-        opacity: 0.5
 
         theme_bg_color: 'Custom'
-        md_bg_color: 0, 0, 0, 0.5
+        md_bg_color: 0, 0, 0, 0
 
         theme_icon_color: 'Custom'
         icon_color: 1, 1, 1, 1

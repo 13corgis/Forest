@@ -6,7 +6,7 @@
 <DashboardScreen@Screen>:
     Video:
         id: dashboard_bg
-        source: app.bg_paths[0]
+        source: 'resources/setup_0.mp4'
         state: 'play'
         options: {'eos': 'loop'}
         fit_mode: 'cover'
@@ -75,7 +75,10 @@
 
             on_release:
                 # ----------------i.e., start timer if no timer event, else stop----------------
+                #Window.fullscreen='auto' if app.timer.tick_event is None else False
                 app.timer.start_timer() if app.timer.tick_event is None else app.timer.stop_timer()
+
+
 
 
             MDButtonIcon:
