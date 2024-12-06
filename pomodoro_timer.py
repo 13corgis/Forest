@@ -11,14 +11,18 @@ class Timer:
         self.tick_event = None
 
         self.app_instance = app_instance
+        self.time = 0
 
     def start_timer(self):
         if self.tick_event is None:
             self.tick_event = Clock.schedule_interval(self.count_down, 1)
+            self.time += 1
+            
 
     def count_down(self, dt):
-        if self.timer_seconds % 20 == 0:
+        if self.time == 20:
             self.app_instance.update_user_session_data()
+            self.time = 0
 
         if self.timer_seconds > 0:
             self.timer_seconds -= 1
@@ -53,6 +57,7 @@ class Timer:
         self.timer_seconds = self.work_minutes * 60
         self.timer_period = 'work'
         self.tick_event = None
+        self.time = 0
 
         self.app_instance.root.get_screen(
             'dashboard').ids.timer_label.text = f'0{self.work_minutes}:00' if self.work_minutes < 10 else f'{self.work_minutes}:00'
