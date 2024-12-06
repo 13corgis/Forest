@@ -69,17 +69,17 @@ class UserStatistics:
     def fetch_data(self):
         # ! List of session_id (A day in this format is 1 session and is unique on a per-day basis: YEAR-MM-DAY)
         user_session_id_data = [
-            (data['session_id']) for data in self.app_instance.collection.find_one(
+            (data['session_id']) for data in self.app_instance._collection.find_one(
                 {'user_id': self.app_instance.current_user}, {'sessions.session_id': 1, '_id': 0})['sessions']]
 
         # ! List of total_work_time per day (parsed as hours instead of seconds)
         user_work_time_data = [
-            (data['total_work_time'] / 3600) for data in self.app_instance.collection.find_one(
+            (data['total_work_time'] / 3600) for data in self.app_instance._collection.find_one(
                 {'user_id': self.app_instance.current_user}, {'sessions.total_work_time': 1, '_id': 0})['sessions']]
 
         # ! List of total_breaK_time per day (parsed as hours instead of seconds)
         user_break_time_data = [
-            (data['total_break_time'] / 3600) for data in self.app_instance.collection.find_one(
+            (data['total_break_time'] / 3600) for data in self.app_instance._collection.find_one(
                 {'user_id': self.app_instance.current_user}, {'sessions.total_break_time': 1, '_id': 0})['sessions']]
 
         self.user_data = pd.DataFrame({
