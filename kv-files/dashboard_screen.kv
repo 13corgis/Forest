@@ -98,9 +98,6 @@
                 app.user_statistics.update_user_stats()
                 app.root.transition = FadeTransition(duration=0.1)
 
-            on_release:
-                Clock.schedule_once(lambda dt: app.user_statistics.display_user_stats(), 2.5)
-
             MDButtonIcon:
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
                 icon: 'chart-box'

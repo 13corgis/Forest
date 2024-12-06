@@ -1,5 +1,6 @@
 import pandas as pd
 import altair as alt
+from kivy.clock import Clock
 
 
 class UserStatistics:
@@ -16,6 +17,8 @@ class UserStatistics:
         self.create_bar_chart()
         self.create_pie_chart()
 
+        Clock.schedule_once(lambda dt: self.app_instance.user_statistics.display_user_stats(), 4)
+
     # ! Update the Components in the Statistics Screen to Display the Updated Charts
     def display_user_stats(self):
         self.app_instance.root.get_screen('dashboard').ids.loading_stats.active = False
@@ -23,6 +26,10 @@ class UserStatistics:
         self.app_instance.root.get_screen('statistics').ids.chart_1.source = "resources/pie_chart.png"
 
         self.app_instance.root.get_screen('statistics').ids.chart_2.source = "resources/bar_chart.png"
+
+        self.app_instance.root.get_screen('statistics').ids.chart_1.reload()
+
+        self.app_instance.root.get_screen('statistics').ids.chart_2.reload()
 
         self.app_instance.root.current = 'statistics'
 
